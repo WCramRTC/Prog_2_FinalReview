@@ -146,12 +146,85 @@ Category represent a unique category item with it's own list of "To Do" items as
 
 ## MainWindow.xaml.cs
 
-- Add Task ( Button Click Event )
+### Create two global variables
 
-- Update Take ( Button Click Event )
+```csharp
+    List<Category> _categories;
+    Category selectedCategory;
+```
 
-- Clear Boxes ( Button Click Event )
+- Initialize the list in MainWindow()
+- Assign categories to your combo boxes ItemsSource
+- Set the selected index of your combo box to 0. The ensures the first item will be selected.
 
-- Preload
+### - **Add Task ( Button Click Event )**
+- When clicked, creates a new Item instance and assigns it to the currently selected category
+- Validation: Requires name and description. If either are **Empty**, display a messagebox saying "Please enter name and description".
+- Refresh the listview. `listViewName.Items.Refresh();`
 
-- 
+![Add Task Example](Images/Add_Task.gif)
+
+### - **Update Task ( Button Click Event )**
+
+- When clicked, the item selected in the list view is updated with the information located below.
+- If the Completed radio button is selected, the selected Items `assignmentCompleted()` method should be called.
+- Refresh the listview. `listViewName.Items.Refresh();`
+
+![Add Task Example](Images/Update_Task.gif)
+
+### - **Clear Input Boxes ( Button Click Event )**
+
+- When clicked, all information is cleared from the boxes.
+    - The task textbox, description, and full display are set to "".
+    - The check boxes are set to false
+    - The radio button, Not Completed, is selected
+    - !! The selected index of the list view is set to -1.
+        > Setting the selected index to -1 deselects everything from the list view.
+
+![Add Task Example](Images/Clear.gif)
+
+### - **Add Category ( Button Click Event )**
+
+- When clicked, adds a new category to our category list.
+- The Combo box should refresh to show the next category.
+    - `comboBoxName.Items.Refresh();`
+
+![Add Task Example](Images/AddCategory.gif)
+
+### - **Preload**
+Call this in your MainWindow(). This will populate your categories list with 3 categories, and 1 item in each category a piece. Feel free to change and add information as you like.
+
+```csharp
+    _categories = new List<Category>
+    {
+        new Category("Today"),
+        new Category("Shopping"),
+        new Category("Travel")
+    };
+
+    // Adding items to our Today category
+    int index = 0;
+    _categories[index].AddItemToCategory(new Item("Grocery Shopping", "Go to Fred Meyers", false, true));
+
+    // Adding items to our Shopping category
+    index = 1;
+    _categories[index].AddItemToCategory(new Item("Pick up Cat Food", "Get Cuts", true, true));
+
+    // Adding items to our Travel category
+    index = 2;
+    _categories[index].AddItemToCategory(new Item("TPick up travel adapter", "Make sure it covers the UK", true, true));
+```
+
+### - **Select Item in ListView ( Selection Changed Event )**
+
+- When an item is clicked in the list view, the `DisplayInformation()` method is called and the resultant string is assigned to the RTB Display Information.
+- The task TextBox, description RTB, two check boxes and the radio button are all updated with information from the selected item.
+
+![Add Task Example](Images/SelectItem.gif)
+
+### - **Change Category ( Selection Changed Event )**
+- When a new category is seleceted, the items in it's `_todoItemsInCategory` are displayed in the list view.
+- This can be done by assigning the categories name to the list view .ItemsSource
+
+
+![Add Task Example](Images/ChangeCategory.gif)
