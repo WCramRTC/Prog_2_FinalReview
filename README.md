@@ -82,5 +82,76 @@ All Controls
 
 ---
 
-## Methods
+## Classes
 
+### ***Item.cs***
+The item class represents a single "To Do" list item.
+
+- **Fields and Properties ( Gets and Sets for all )**
+
+```csharp
+    string _name;
+    string _description;
+    bool _highImportance;
+    bool _timeSensitive;
+    bool _isCompleted;
+```
+
+- **Constructor**
+    - Takes arguments for 
+        - Name
+        - Description
+        - High Importance
+        - Time Sensitive
+    - Sets `_isCompleted` to false
+
+- **Methods**
+    - `string DisplayInformation()`
+        - Returns a string with the instanced Items information.
+
+        Ex.
+![Description](Images/Description.png)
+
+    - `void AssignmentCompleted()`
+        - Assigns true to the `isCompleted` property
+        - Appends "**Task Completed**" to the description
+
+        Ex. ![Description](Images/Assignment_Completed.gif)
+
+---
+
+### ***Category.cs***
+Category represent a unique category item with it's own list of "To Do" items associated with it.
+
+- **Fields and Properties ( getters and setters for both)**
+
+```csharp
+    string _name;
+    List<Item> _todoItemsInCategory;
+```
+
+- **Constructor**
+    - Create a constructor that takes a name
+    - Initialize the List<Item> in your constructor
+
+- **Methods**
+    - `void AddItemToCategory(Item item)`
+        - Pass an item in to add it to our category to do list
+        - This replaces have the user have to do use `categoryName.TodoItemsInCategory.Add()`. It helps read ability and *abstracts* how our code works ( more on this in programming 3 ).
+    - `override string ToString()`
+        - Return the category name
+        - This is used to easily display the category name to our combo box.
+
+--- 
+
+## MainWindow.xaml.cs
+
+- Add Task ( Button Click Event )
+
+- Update Take ( Button Click Event )
+
+- Clear Boxes ( Button Click Event )
+
+- Preload
+
+- 
